@@ -6,6 +6,7 @@ const Product = () => {
     <div className='wrapper-product'>
       <div>
         Shopping Cart: 0 total items.
+        hello
       </div>
       <div>Total: 0</div>
 
