@@ -6,20 +6,24 @@ import './ProductList.css'
 const products = [
   {
     emoji: '🍦',
-    name: 'ice cream',
+    name: 'Ice cream',
     price: 5
   },
   {
     emoji: '🍩',
-    name: 'donuts',
+    name: 'Donut',
     price: 2.5,
   },
   {
     emoji: '🍉',
-    name: 'watermelon',
+    name: 'Watermelon',
     price: 4
   }
 ]
+
+const currencyFormat = (number) => {
+  return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(number)
+}
 
 const ProductList = () => {
   const [items, setItems] = useState([]);
@@ -46,7 +50,7 @@ const ProductList = () => {
   }
 
   const getTotal = () => {
-    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(items.reduce((sum, item) => sum + item.price, 0))
+    return currencyFormat(items.reduce((sum, item) => sum + item.price, 0))
   }
   return (
     <div className='wrapper-product'>
@@ -56,7 +60,7 @@ const ProductList = () => {
         onAdd={()=> onAdd(item)}
         onRemove={()=> onRemove(item)}
       />)}
-      <Cart items={items.length} total={getTotal()} />
+      <Cart items={items} total={getTotal()} currencyFormat={currencyFormat} />
     </div>
   )
 }
